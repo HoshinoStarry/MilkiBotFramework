@@ -349,16 +349,11 @@ public partial class PluginManager
     private PluginInfo GetPluginInfo(Type type, Type baseType, string? defaultAuthor)
     {
         PluginLifetime lifetime;
-        if (baseType == StaticTypes.ServicePlugin)
-        {
-            lifetime = PluginLifetime.Singleton;
-        }
-        else
-        {
-            lifetime = type.GetCustomAttribute<PluginLifetimeAttribute>()?.Lifetime ??
-                       throw new ArgumentNullException(nameof(PluginLifetimeAttribute.Lifetime),
-                           "The plugin lifetime is undefined: " + type.FullName);
-        }
+        lifetime = baseType == StaticTypes.ServicePlugin
+            ? PluginLifetime.Singleton
+            : type.GetCustomAttribute<PluginLifetimeAttribute>()?.Lifetime ??
+              throw new ArgumentNullException(nameof(PluginLifetimeAttribute.Lifetime),
+                  "The plugin lifetime is undefined: " + type.FullName);
 
         var identifierAttribute = type.GetCustomAttribute<PluginIdentifierAttribute>() ??
                                   throw new Exception("The plugin identifier is undefined: " + type.FullName);

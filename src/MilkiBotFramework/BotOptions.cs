@@ -22,7 +22,7 @@ public class BotOptions : ConfigurationBase
     };
 
     [Description("命令触发前缀")]
-    public char CommandFlag { get; set; } = '/';
+    public string CommandFlag { get; set; } = "";
 
     [Description("Root权限账号")]
     // ReSharper disable once CollectionNeverUpdated.Global

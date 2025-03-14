@@ -23,15 +23,14 @@ public class CommandLineAnalyzer : ICommandLineAnalyzer
     {
         var commandFlag = GetCommandFlag();
 
-        var memory = input.AsMemory().Trim();
-        if (memory.Length <= 1 || memory.Span[0] != commandFlag)
+        if (input.Length <= 1 || input.StartsWith(commandFlag))
         {
             result = null;
             exception = null;
             return false;
         }
 
-        memory = memory[1..];
+        var memory = input[commandFlag.Length..].AsMemory().Trim();
 
         int index = 0;
         int? simpleArgStart = null;
@@ -156,7 +155,7 @@ public class CommandLineAnalyzer : ICommandLineAnalyzer
         }
     }
 
-    protected virtual char GetCommandFlag()
+    protected virtual string GetCommandFlag()
     {
         return _botOptions.CommandFlag;
     }

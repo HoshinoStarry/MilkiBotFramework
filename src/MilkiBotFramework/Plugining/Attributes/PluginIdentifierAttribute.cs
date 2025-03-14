@@ -1,17 +1,15 @@
 ﻿namespace MilkiBotFramework.Plugining.Attributes;
 
 [AttributeUsage(AttributeTargets.Class)]
-public sealed class PluginIdentifierAttribute : Attribute
+public sealed class PluginIdentifierAttribute(string guid, string? name = null) : Attribute
 {
-    public PluginIdentifierAttribute(string guid, string? name = null)
+    public PluginIdentifierAttribute(string? name = null) : this(System.Guid.NewGuid().ToString(), name)
     {
-        Guid = guid;
-        Name = name;
     }
 
     public string? Scope { get; init; }
-    public string Guid { get; }
-    public string? Name { get; }
+    public string Guid { get; } = guid;
+    public string? Name { get; } = name;
     public string? Authors { get; init; }
 
     /// <summary>
