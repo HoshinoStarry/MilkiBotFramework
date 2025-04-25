@@ -84,7 +84,7 @@ internal static class AssemblyHelper
     {
         if (!module.HasTypes)
             return Array.Empty<string>();
-        string[] typeResults = module.Types.Select(k =>
+        var typeResults = module.Types.Select(k =>
         {
             if (k.FullName.Contains("MyPluginDbContext"))
             {

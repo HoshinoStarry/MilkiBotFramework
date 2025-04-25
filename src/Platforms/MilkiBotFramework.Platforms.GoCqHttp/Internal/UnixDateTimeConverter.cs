@@ -27,7 +27,7 @@ namespace MilkiBotFramework.Platforms.GoCqHttp.Internal
                     throw new JsonException($"Cannot convert invalid value to {ObjectType}.");
             }
 
-            DateTime dateTime = result >= 0L
+            var dateTime = result >= 0L
                 ? UnixEpoch.AddSeconds(result)
                 : throw new JsonException(
                     $"Cannot convert value that is before Unix epoch of 00:00:00 UTC on 1 January 1970 to {ObjectType}.");

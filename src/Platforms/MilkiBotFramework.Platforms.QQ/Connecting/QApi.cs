@@ -146,8 +146,8 @@ public class QApi : IMessageApi
 
         var imageMessages = new List<IRichMessage>();
         var allMessages = new Dictionary<IRichMessage, int>();
-        int imageIndex = 1;
-        int i = 0;
+        var imageIndex = 1;
+        var i = 0;
         foreach (var (message, _) in messages)
         {
             if (message is MemoryImage or FileImage or LinkImage)

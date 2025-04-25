@@ -73,7 +73,7 @@ public partial class PluginManager
     {
         var (scopes, _, serviceExecutionInfos) = await GetExecutionList(true);
 
-        bool handled = false;
+        var handled = false;
         foreach (var serviceExecutionInfo in serviceExecutionInfos)
         {
             var servicePlugin = (ServicePlugin)serviceExecutionInfo.PluginInstance;
@@ -164,7 +164,7 @@ public partial class PluginManager
         var executedPlugins = (List<PluginInfo>)messageContext.ExecutedPlugins;
         nextPlugins.AddRange(basicExecutionInfos.Select(pluginExecutionInfo => pluginExecutionInfo.PluginInfo));
 
-        bool handled = false;
+        var handled = false;
         foreach (var pluginExecutionInfo in basicExecutionInfos)
         {
             var pluginInstance = pluginExecutionInfo.PluginInstance;

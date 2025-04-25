@@ -181,14 +181,14 @@ public class LightHttpClient
 
     public async Task<(byte[] ImageBytes, ImageType ImageType)> GetImageBytesFromUrlAsync(string uri)
     {
-        byte[] urlContents = await _httpClient.GetByteArrayAsync(uri);
+        var urlContents = await _httpClient.GetByteArrayAsync(uri);
         var type = ImageHelper.GetKnownImageType(urlContents);
         return (urlContents, type);
     }
 
     public async Task<(Image InMemoryImage, ImageType ImageType)> GetImageFromUrlAsync(string uri)
     {
-        byte[] urlContents = await _httpClient.GetByteArrayAsync(uri);
+        var urlContents = await _httpClient.GetByteArrayAsync(uri);
         var type = ImageHelper.GetKnownImageType(urlContents);
         var ms = new MemoryStream(urlContents);
         return (await Image.LoadAsync(ms), type);
@@ -196,9 +196,9 @@ public class LightHttpClient
 
     public async Task<string> SaveImageFromUrlAsync(string uri, string saveDir, string filename)
     {
-        byte[] urlContents = await _httpClient.GetByteArrayAsync(uri);
+        var urlContents = await _httpClient.GetByteArrayAsync(uri);
         var type = ImageHelper.GetKnownImageType(urlContents);
-        string ext = type switch
+        var ext = type switch
         {
             ImageType.Jpeg => ".jpg",
             ImageType.Png => ".png",
@@ -207,7 +207,7 @@ public class LightHttpClient
             _ => ""
         };
 
-        string fullname = Path.Combine(saveDir, filename + ext);
+        var fullname = Path.Combine(saveDir, filename + ext);
         await File.WriteAllBytesAsync(fullname, urlContents);
 
         return new FileInfo(fullname).FullName;
@@ -290,7 +290,7 @@ public class LightHttpClient
 
     private async Task<object> RunWithRetry<T>(RequestContext context, Func<Task<T>> func)
     {
-        for (int i = 0; i < _clientCreationOptions.RetryCount; i++)
+        for (var i = 0; i < _clientCreationOptions.RetryCount; i++)
         {
             var uri = context.RequestUri;
             try
@@ -335,7 +335,7 @@ public class LightHttpClient
             return null;
 
         var sb = new StringBuilder("?");
-        int i = 0;
+        var i = 0;
         foreach (var (key, value) in args)
         {
             if (i > 0) sb.Append('&');
@@ -359,7 +359,7 @@ public class LightHttpClient
     {
         var maxCharLength = content.Length * 12;
         char[]? bytesRent = null;
-        Span<char> chars = maxCharLength <= FrameworkConstants.MaxStackArrayLength
+        var chars = maxCharLength <= FrameworkConstants.MaxStackArrayLength
             ? stackalloc char[maxCharLength]
             : bytesRent = ArrayPool<char>.Shared.Rent(maxCharLength);
         try

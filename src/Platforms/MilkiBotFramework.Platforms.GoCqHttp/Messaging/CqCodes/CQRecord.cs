@@ -83,7 +83,7 @@ public class CQRecord : IRichMessage
 
     public async ValueTask<string> EncodeAsync()
     {
-        for (int i = 0; i < 2; i++)
+        for (var i = 0; i < 2; i++)
         {
             if (RecordFileBytes != null)
             {

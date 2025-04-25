@@ -129,11 +129,11 @@ public partial class PluginManager
                 continue;
             }
 
-            bool isValid = false;
+            var isValid = false;
 
             try
             {
-                Assembly assembly = ctx.LoadFromAssemblyPath(assemblyPath);
+                var assembly = ctx.LoadFromAssemblyPath(assemblyPath);
                 var defaultAuthor = assembly.GetCustomAttribute<AssemblyCompanyAttribute>()?.Company;
                 var version = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                     ?.InformationalVersion ?? "0.0.1-alpha";
@@ -146,7 +146,7 @@ public partial class PluginManager
                 {
                     var typeFullName = typeResult.TypeFullName!;
                     var baseType = typeResult.BaseType!;
-                    string typeName = "";
+                    var typeName = "";
                     PluginInfo? pluginInfo = null;
                     try
                     {
@@ -452,7 +452,7 @@ public partial class PluginManager
             ParameterType = targetType,
         };
 
-        bool isReady = false;
+        var isReady = false;
         foreach (var attr in attrs)
         {
             if (attr is OptionAttribute option)

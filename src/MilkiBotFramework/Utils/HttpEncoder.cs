@@ -14,7 +14,7 @@ internal static class HttpEncoder
         }
 
         byte[]? bytes = null;
-        Span<byte> span = str.Length * 4 <= FrameworkConstants.MaxStackArrayLength
+        var span = str.Length * 4 <= FrameworkConstants.MaxStackArrayLength
             ? stackalloc byte[str.Length * 4]
             : bytes = Encoding.UTF8.GetBytes(str);
         var isStack = bytes == null;
@@ -27,7 +27,7 @@ internal static class HttpEncoder
 
         var bufferLength = span.Length * 3;
         byte[]? bytesRent = null;
-        Span<byte> buffer = bufferLength <= FrameworkConstants.MaxStackArrayLength
+        var buffer = bufferLength <= FrameworkConstants.MaxStackArrayLength
             ? stackalloc byte[bufferLength]
             : bytesRent = ArrayPool<byte>.Shared.Rent(bufferLength);
         try
@@ -46,20 +46,20 @@ internal static class HttpEncoder
 
     public static bool UrlEncode(Span<byte> bytes, Span<byte> buffer, out int wroteLength)
     {
-        int count = bytes.Length;
+        var count = bytes.Length;
         if (!ValidateUrlEncodingParameters(bytes, buffer.Length))
         {
             wroteLength = 0;
             return false;
         }
 
-        int cSpaces = 0;
-        int cUnsafe = 0;
+        var cSpaces = 0;
+        var cUnsafe = 0;
 
         // count them first
-        for (int i = 0; i < count; i++)
+        for (var i = 0; i < count; i++)
         {
-            char ch = (char)bytes[i];
+            var ch = (char)bytes[i];
 
             if (ch == ' ')
             {
@@ -87,12 +87,12 @@ internal static class HttpEncoder
             return false;
         }
 
-        int pos = 0;
+        var pos = 0;
 
-        for (int i = 0; i < count; i++)
+        for (var i = 0; i < count; i++)
         {
-            byte b = bytes[i];
-            char ch = (char)b;
+            var b = bytes[i];
+            var ch = (char)b;
 
             if (IsUrlSafeChar(ch))
             {

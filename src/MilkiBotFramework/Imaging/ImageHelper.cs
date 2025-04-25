@@ -88,7 +88,7 @@ public static class ImageHelper
         var pathList = new List<string>();
         foreach (var keyValuePair in images)
         {
-            string outputFilePath = Path.GetFullPath(Path.Combine(saveFolder, $"{guid}-{j:00}.png"));
+            var outputFilePath = Path.GetFullPath(Path.Combine(saveFolder, $"{guid}-{j:00}.png"));
             await keyValuePair.Image.SaveAsPngAsync(outputFilePath);
             pathList.Add(outputFilePath);
             j++;
@@ -283,12 +283,12 @@ public static class ImageHelper
     {
         using var image = (Image<Rgba32>)Image.Load(targetPath);
         var arr = new Color[256];
-        int k = 0;
+        var k = 0;
         image.ProcessPixelRows(pixelAccessor =>
         {
-            for (int y = 0; y < pixelAccessor.Height; y++)
+            for (var y = 0; y < pixelAccessor.Height; y++)
             {
-                Span<Rgba32> row = pixelAccessor.GetRowSpan(y);
+                var row = pixelAccessor.GetRowSpan(y);
 
                 // Using row.Length helps JIT to eliminate bounds checks when accessing row[x].
                 foreach (var color in row)

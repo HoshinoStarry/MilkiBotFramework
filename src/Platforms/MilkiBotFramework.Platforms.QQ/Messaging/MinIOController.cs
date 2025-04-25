@@ -50,7 +50,7 @@ public class MinIOController
 
         var beArgs = new BucketExistsArgs()
             .WithBucket(bucketName);
-        bool found = await _minio.BucketExistsAsync(beArgs).ConfigureAwait(false);
+        var found = await _minio.BucketExistsAsync(beArgs).ConfigureAwait(false);
         if (!found)
         {
             var mbArgs = new MakeBucketArgs()
@@ -94,7 +94,7 @@ public class MinIOController
 
         var beArgs = new BucketExistsArgs()
             .WithBucket(bucketName);
-        bool found = await _minio.BucketExistsAsync(beArgs).ConfigureAwait(false);
+        var found = await _minio.BucketExistsAsync(beArgs).ConfigureAwait(false);
         if (!found)
         {
             var mbArgs = new MakeBucketArgs()

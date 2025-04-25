@@ -40,7 +40,7 @@ public ref struct ValueListBuilder<T>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Append(T item)
     {
-        int pos = _pos;
+        var pos = _pos;
         if (pos >= _span.Length)
             Grow();
 
@@ -56,7 +56,7 @@ public ref struct ValueListBuilder<T>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Dispose()
     {
-        T[]? toReturn = _arrayFromPool;
+        var toReturn = _arrayFromPool;
         if (toReturn != null)
         {
             _arrayFromPool = null;
@@ -66,12 +66,12 @@ public ref struct ValueListBuilder<T>
 
     private void Grow()
     {
-        T[] array = ArrayPool<T>.Shared.Rent(_span.Length * 2);
+        var array = ArrayPool<T>.Shared.Rent(_span.Length * 2);
 
-        bool success = _span.TryCopyTo(array);
+        var success = _span.TryCopyTo(array);
         Debug.Assert(success);
 
-        T[]? toReturn = _arrayFromPool;
+        var toReturn = _arrayFromPool;
         _span = _arrayFromPool = array;
         if (toReturn != null)
         {

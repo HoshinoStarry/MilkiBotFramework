@@ -26,9 +26,9 @@ public class StreamCommandLineAnalyzer : ICommandLineAnalyzer
 
         var reader = new StringReader(input);
         var builder = new StringBuilder();
-        int r = reader.Read();
+        var r = reader.Read();
 
-        bool isReadingArgOrSwitch = false;
+        var isReadingArgOrSwitch = false;
 
         var args = new Dictionary<ReadOnlyMemory<char>, ReadOnlyMemory<char>?>();
         var freeArgs = new List<ReadOnlyMemory<char>>();
@@ -39,7 +39,7 @@ public class StreamCommandLineAnalyzer : ICommandLineAnalyzer
 
         while (r != -1)
         {
-            char c = (char)r;
+            var c = (char)r;
             string value;
 
             if (Keywords.Contains(c)) // if the char is keyword
@@ -133,7 +133,7 @@ public class StreamCommandLineAnalyzer : ICommandLineAnalyzer
 
     private static string ReadUntilChars(TextReader reader, StringBuilder builder, char[] ch)
     {
-        int r = reader.Peek();
+        var r = reader.Peek();
         while (r != -1)
         {
             var c = (char)r;

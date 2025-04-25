@@ -76,7 +76,7 @@ public class GoCqMessageConverter : IRichMessageConverter
         tempRanges.Sort(RangeComparer.Instance);
 
 
-        foreach ((int index, int count, bool isRaw) in tempRanges)
+        foreach ((var index, var count, var isRaw) in tempRanges)
         {
             var subMessage = message.Slice(index, count);
 
@@ -120,7 +120,7 @@ public class GoCqMessageConverter : IRichMessageConverter
 
     private static void FillRawRanges(ReadOnlyMemory<char> message, List<(int index, int count, bool isRaw)> ranges)
     {
-        int preIndex = 0;
+        var preIndex = 0;
         for (var i = 0; i < ranges.Count; i++)
         {
             var (index, count, _) = ranges[i];

@@ -70,7 +70,7 @@ public class YamlConverter
         if (!type.IsGenericType) return type.FullName;
 
         var genericType = type.GetGenericTypeDefinition();
-        string? fullName = genericType.FullName;
+        var fullName = genericType.FullName;
         if (fullName?.Contains("`") == true)
         {
             fullName = fullName.Substring(0, fullName.IndexOf("`", StringComparison.Ordinal));

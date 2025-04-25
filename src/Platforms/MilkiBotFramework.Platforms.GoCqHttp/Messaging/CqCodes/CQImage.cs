@@ -110,7 +110,7 @@ namespace MilkiBotFramework.Platforms.GoCqHttp.Messaging.CqCodes
 
         public async ValueTask<string> EncodeAsync()
         {
-            for (int i = 0; i < 2; i++)
+            for (var i = 0; i < 2; i++)
             {
                 if (ImageFileBytes != null)
                 {

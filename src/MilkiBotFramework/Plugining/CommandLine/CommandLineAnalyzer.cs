@@ -32,10 +32,10 @@ public class CommandLineAnalyzer : ICommandLineAnalyzer
 
         var memory = input[commandFlag.Length..].AsMemory().Trim();
 
-        int index = 0;
+        var index = 0;
         int? simpleArgStart = null;
         int? simpleArgEnd = null;
-        int count = 0;
+        var count = 0;
 
         var authority = CommandLineAuthority.Public;
         ReadOnlyMemory<char>? command = null;

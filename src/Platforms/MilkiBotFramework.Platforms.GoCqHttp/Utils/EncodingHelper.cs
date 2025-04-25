@@ -7,7 +7,7 @@ public static class EncodingHelper
         if (stream.Position != 0) stream.Position = 0;
 
         var length = stream.Length;
-        Span<byte> span = length <= FrameworkConstants.MaxStackArrayLength
+        var span = length <= FrameworkConstants.MaxStackArrayLength
             ? stackalloc byte[(int)length]
             : new byte[length];
         _ = stream.Read(span);

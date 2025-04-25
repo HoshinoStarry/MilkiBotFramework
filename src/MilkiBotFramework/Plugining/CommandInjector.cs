@@ -72,9 +72,9 @@ public class CommandInjector
         var options = commandLineResult.Options
             .ToDictionary(k => k.Key.ToString(), k => k.Value);
 
-        bool modelBind = false;
-        bool paramBind = false;
-        int argIndex = 0;
+        var modelBind = false;
+        var paramBind = false;
+        var argIndex = 0;
         for (var i = 0; i < parameterCount; i++)
         {
             var paramDef = parameterInfos[i];
@@ -228,7 +228,7 @@ public class CommandInjector
         }
 
         var instance = Activator.CreateInstance(parameterType);
-        int argIndex = 0;
+        var argIndex = 0;
         foreach (var paramDef in modelBindingInfo.ParameterInfos)
         {
             if (paramDef.IsArgument)
@@ -257,7 +257,7 @@ public class CommandInjector
             PropertyInfo = property
         };
 
-        bool isReady = false;
+        var isReady = false;
         foreach (var attr in attrs)
         {
             if (attr is OptionAttribute option)
